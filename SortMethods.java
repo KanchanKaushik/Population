@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class SortMethods {
 	
 	// temporary list of cities for merge sort
-	private List<City> temp;
+	
 	
 	/**
 	 *	Swaps two City objects in List arr
@@ -76,7 +76,6 @@ public class SortMethods {
 	public void mergeSort1(List<City> arr) 
 	{
 		int n = arr.size();
-		temp = new ArrayList<City>(n);
 		recursiveSort1(arr, 0, n-1);
 	}
 	
@@ -117,6 +116,7 @@ public class SortMethods {
 	 */
 	public void merge1(List<City> a, int from, int middle, int to)
 	{
+		List<City> temp = new ArrayList<City>();
 		int i = from, j = middle +1, k=from;
 
 		// while both arrays have elements left unprocessed:
@@ -124,12 +124,12 @@ public class SortMethods {
 		{
 			if((a.get(i)).compareTo(a.get(j))>0)
 			{
-				temp.add(k, a.get(i)); // or simply temp[k] = a[i++]
+				temp.add(a.get(i)); // or simply temp[k] = a[i++]
 				i++;
 			}
 			else
 			{
-				temp.add(k, a.get(j));
+				temp.add(a.get(j));
 				j++;
 			}
 			k++;
@@ -138,7 +138,7 @@ public class SortMethods {
 		// copy the tail of the first half, if any, into temp:
 		while(i<= middle)
 		{
-			temp.add(k, a.get(i)); // or simply temp[k++] = a[i++]
+			temp.add(a.get(i)); // or simply temp[k++] = a[i++]
 			i++;
 			k++;
 		}
@@ -146,14 +146,14 @@ public class SortMethods {
 		//copy the tail of the second half, if any, into temp:
 		while(j<= to)
 		{
-			temp.add(k, a.get(j)); // or simply temp[k++] = a[j++]
+			temp.add(a.get(j)); // or simply temp[k++] = a[j++]
 			j++;
 			k++;
 		}
 
 		// copy temp back into a
-		for(k= from; k<=to; k++)
-			a.set(k, temp.get(k));
+		for(k= 0; k<temp.size(); k++)
+			a.set(from+k, temp.get(k));
 	}
 
 
@@ -167,7 +167,6 @@ public class SortMethods {
 	public void mergeSort2(List<City> arr) 
 	{
 		int n = arr.size();
-		temp = new ArrayList<City>(n);
 		recursiveSort2(arr, 0, n-1);
 	}
 	
@@ -214,6 +213,7 @@ public class SortMethods {
 	 */
 	public void merge2(List<City> a, int from, int middle, int to)
 	{
+		List<City> temp = new ArrayList<City>();
 		int i = from, j = middle +1, k=from;
 
 		// while both arrays have elements left unprocessed:
@@ -222,12 +222,12 @@ public class SortMethods {
 			if(((a.get(i)).getName()).compareTo((a.get(j)).getName())>0
                 || (((a.get(i)).getName()).compareTo((a.get(j)).getName())==0 && (a.get(i)).compareTo(a.get(j))<0))
 			{
-				temp.add(k, a.get(i)); // or simply temp[k] = a[i++]
+				temp.add(a.get(i)); // or simply temp[k] = a[i++]
 				i++;
 			}
 			else
 			{
-				temp.add(k, a.get(j));
+				temp.add(a.get(j));
 				j++;
 			}
 			k++;
@@ -236,7 +236,7 @@ public class SortMethods {
 		// copy the tail of the first half, if any, into temp:
 		while(i<= middle)
 		{
-			temp.add(k, a.get(i)); // or simply temp[k++] = a[i++]
+			temp.add(a.get(i)); // or simply temp[k++] = a[i++]
 			i++;
 			k++;
 		}
@@ -244,14 +244,14 @@ public class SortMethods {
 		//copy the tail of the second half, if any, into temp:
 		while(j<= to)
 		{
-			temp.add(k, a.get(j)); // or simply temp[k++] = a[j++]
+			temp.add(a.get(j)); // or simply temp[k++] = a[j++]
 			j++;
 			k++;
 		}
 
 		// copy temp back into a
-		for(k= from; k<=to; k++)
-			a.set(k, temp.get(k));
+		for(k= 0; k<temp.size(); k++)
+			a.set(from+k, temp.get(k));
 	}
 }
 
